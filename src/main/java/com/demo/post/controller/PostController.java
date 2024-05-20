@@ -4,11 +4,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.post.entity.Post;
+import com.demo.post.exception.PostNotFoundException;
 import com.demo.post.repository.PostRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
@@ -22,8 +26,15 @@ public class PostController {
 	}
 	
 	@GetMapping("")
-	public List<Post> getPosts() {
+	List<Post> findAll() {
 		return postRepository.findAll();
+	}
+
+	@GetMapping("/{id}")
+	Optional<Post> findById(@PathVariable("id") Integer id) {
+		return Optional.ofNullable(
+			postRepository.findById(id)
+			.orElseThrow(PostNotFoundException::new));
 	}
 	
 }
