@@ -1,4 +1,4 @@
-package com.demo.posts;
+package com.demo.post;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
